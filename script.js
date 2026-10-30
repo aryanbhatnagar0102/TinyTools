@@ -87,7 +87,8 @@ function openTool(toolName) {
         toolName !== "Percentage Calculator" && 
         toolName !== "Unit Converter" && 
         toolName !== "QR Code Generator" && 
-        toolName !== "Password Generator") {
+        toolName !== "Password Generator" && 
+        toolName !== "Stopwatch & Timer") {
         alert("This tool is coming soon!");
         return;
     }
@@ -176,6 +177,24 @@ function openTool(toolName) {
           <p id="password-message"></p>
         `;
 
+    } else if (toolName === "Stopwatch & Timer") {
+        toolContent.innerHTML = `
+        <h3>Stopwatch</h3>
+        <h2 id="stopwatch-display">00:00:00</h2>
+        <button id="start-stopwatch">Start</button>
+        <button id="pause-stopwatch">Pause</button>
+        <button id="reset-stopwatch">Reset</button>
+
+        <hr>
+
+        <h3>Countdown Timer</h3>
+        <input type="number" id="timer-minutes" placeholder="Minutes" min="0">
+        <input type="number" id="timer-seconds" placeholder="Seconds" min="0" max="59">
+        <h2 id="timer-display">00:00</h2>
+        <button id="start-timer">Start Timer</button>
+        <button id="pause-timer">Pause Timer</button>
+        <button id="reset-timer">Reset Timer</button>
+        `;
     }
     else {
         toolContent.innerHTML = `
@@ -509,6 +528,110 @@ function openTool(toolName) {
             document.getElementById("password-message").textContent = "Copy failed. Try using Live Server.";
         }
         });
+    }
+
+    if(toolName === "Stopwatch & Timer") {
+        let elapsed =0;
+        let stopwatchInterval = null;
+        let remaining = 0;
+        let timerInterval = null;
+
+        const stopwatchDisplay = document.getElementById("stopwatch-display");
+        const timerDisplay = document.getElementById("timer-display");
+
+        function formatTime(seconds) {
+        const hours = Math.floor(seconds / 3600);
+        const minutes = Math.floor((seconds % 3600) / 60);
+        const secs = seconds % 60;
+
+        return [hours, minutes, secs]
+            .map(value => String(value).padStart(2, "0"))
+            .join(":");
+        }
+
+        function updateStopwatch() {
+            stopwatchDisplay.textContent = formatTime(elapsed);
+        }
+
+        document.getElementById("start-stopwatch").addEventListener("click",function() {
+            if (stopwatchInterval !== null) return;
+
+            stopwatchInterval = setInterval(function() {
+                elapsed++;
+                updateStopwatch();
+            },1000);
+        });
+
+        document.getElementById("pause-stopwatch").addEventListener("click", function() {
+        clearInterval(stopwatchInterval);
+        stopwatchInterval = null;
+        });
+
+        document.getElementById("reset-stopwatch").addEventListener("click", function() {
+        clearInterval(stopwatchInterval);
+        stopwatchInterval = null;
+        elapsed = 0;
+        updateStopwatch();
+        });
+
+        function updateTimer() {
+            const minutes = Math.floor(remaining/60);
+            const seconds = remaining % 60;
+
+             timerDisplay.textContent =
+            `${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`;
+        }  
+
+        document.getElementById("start-timer").addEventListener("click",function() {
+            if(timerInterval !== null) return;
+
+            if(remaining === 0){
+                const minutesText = document.getElementById("timer-minutes").value;
+                const secondsText = document.getElementById("timer-seconds").value;
+
+                const minutes = Number(minutesText || 0);
+                const seconds = Number(secondsText || 0);
+
+                if (
+                minutesText.trim() === "" && secondsText.trim() === "" ||
+                !Number.isInteger(minutes) ||
+                !Number.isInteger(seconds) ||
+                minutes < 0 || seconds < 0 || seconds > 59 ||
+                minutes + seconds === 0
+               ) {
+                alert("Enter a valid timer duration.");
+                return;
+               }
+
+               remaining = minutes * 60 + seconds;
+            }
+
+            updateTimer();
+
+            timerInterval = setInterval(function() {
+                remaining--;
+                updateTimer();
+
+                if(remaining<= 0) {
+                    clearInterval(timerInterval);
+                    timerInterval = null;
+                    alert("Timer finished.");
+                }
+            },1000);
+        });
+
+        document.getElementById("pause-timer").addEventListener("click",function() {
+            clearInterval(timerInterval);
+            timerInterval = null;
+        });
+
+        document.getElementById("reset-timer").addEventListener("click",function() {
+            clearInterval(timerInterval);
+            timerInterval = null;
+            remaining = 0;
+            timerDisplay.textContent = "00:00";
+        });
+
     }
 }
 
