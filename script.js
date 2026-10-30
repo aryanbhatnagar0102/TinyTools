@@ -86,7 +86,8 @@ function openTool(toolName) {
         toolName !== "Text Formatter" &&
         toolName !== "Percentage Calculator" && 
         toolName !== "Unit Converter" && 
-        toolName !== "QR Code Generator ") {
+        toolName !== "QR Code Generator" && 
+        toolName !== "Password Generator") {
         alert("This tool is coming soon!");
         return;
     }
@@ -154,6 +155,27 @@ function openTool(toolName) {
           <div id="qr-result"></div>
           <button id="download-qr" class = "hidden">Download PNG</button>
           `;
+    } else if (toolName === "Password Generator") {
+        toolContent.innerHTML = `
+          <h3>Password Generator</h3>
+          <p>Create a strong password</p>
+          
+          <label for="password-length">Password Length:</label>
+          <input type= "number" id="password-length" value="16" min="8" max="64">
+          
+          <div>
+            <label><input type="checkbox" id="include-upper" checked> Uppercase (A-Z)</label>
+            <label><input type="checkbox" id="include-lower" checked> Lowercase (a-z)</label>
+            <label><input type="checkbox" id="include-numbers" checked> Numbers (0-9)</label>
+            <label><input type="checkbox" id="include-symbols" checked> Symbols (!@#)</label>
+          </div>
+
+          <button id="generate-password">Generate Password</button>
+          <input type="text" id="password-result" readonly placeholder="Ypir password appears here">
+          <button id="copy-password">Copy Password</button>
+          <p id="password-message"></p>
+        `;
+
     }
     else {
         toolContent.innerHTML = `
@@ -422,6 +444,71 @@ function openTool(toolName) {
         };
 
         document.head.appendChild(script);
+    }
+
+    if(toolName === "Password Generator") {
+        document.getElementById("generate-password").addEventListener("click",function() {
+            const length = Number(document.getElementById("password-length").value);
+            const groups = [];
+
+             if (document.getElementById("include-upper").checked) groups.push("ABCDEFGHIJKLMNOPQRSTUVWXYZ");
+             if (document.getElementById("include-lower").checked) groups.push("abcdefghijklmnopqrstuvwxyz");
+             if (document.getElementById("include-numbers").checked) groups.push("0123456789");
+             if (document.getElementById("include-symbols").checked) groups.push("!@#$%^&*()-_=+");
+
+             const result = document.getElementById("password-result");
+             const message = document.getElementById("password-message");
+
+             if (!Number.isInteger(length) || length < 8 || length > 64){
+                alert("Choose a length between 8 and 64.");
+                return;
+             }
+
+             if(groups.length === 0){
+                alert("Select at least one character type,");
+                return;
+             }
+
+             const allCharacters = groups.join("");
+             const password = [];
+             
+             function randomCharacter(characters) {
+                const index = crypto.getRandomValues(new Uint32Array(1))[0] % characters.length;
+                return characters[index];
+             }
+
+             groups.forEach(function(group) {
+            password.push(randomCharacter(group));
+        });
+
+        while (password.length < length) {
+            password.push(randomCharacter(allCharacters));
+        }
+
+        for (let i = password.length - 1; i > 0; i--) {
+            const j = crypto.getRandomValues(new Uint32Array(1))[0] % (i + 1);
+            [password[i], password[j]] = [password[j], password[i]];
+        }
+
+        result.value = password.join("");
+        message.textContent = "Password generated successfully.";
+    });
+
+    document.getElementById("copy-password").addEventListener("click", async function() {
+        const password = document.getElementById("password-result").value;
+
+        if (!password) {
+            alert("Generate a password first.");
+            return;
+        }
+
+       try {
+            await navigator.clipboard.writeText(password);
+            document.getElementById("password-message").textContent = "Password copied!";
+        } catch (error) {
+            document.getElementById("password-message").textContent = "Copy failed. Try using Live Server.";
+        }
+        });
     }
 }
 
