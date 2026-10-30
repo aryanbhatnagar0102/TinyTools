@@ -1,3 +1,15 @@
+/* TinyTools - flat, bold borders, hard shadows */
+
+:root {
+    --ink: #111111;
+    --paper: #efece4;
+    --white: #ffffff;
+    --muted: #55524b;
+    --highlight: #fff0a8;
+    --shadow: 4px 4px 0 var(--ink);
+    --shadow-hover: 6px 6px 0 var(--ink);
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -5,145 +17,195 @@
 }
 
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f5f7fb;
-    color: #1e293b;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: var(--paper);
+    color: var(--ink);
+    line-height: 1.5;
 }
 
+.hidden {
+    display: none !important;
+}
+
+/* Header */
+
 header {
-    text-align: center;
-    padding: 50px 20px 30px;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 56px 20px 18px;
 }
 
 header h1 {
-    font-size: 42px;
+    font-size: 40px;
     font-weight: 700;
-    margin-bottom: 10px;
-    color: #4f46e5;
+    letter-spacing: -1px;
+    line-height: 1.1;
+    margin-bottom: 8px;
+    color: var(--ink);
 }
 
 header p {
     font-size: 16px;
-    color: #64748b;
+    color: var(--muted);
 }
+
+/* Layout */
 
 main {
     max-width: 1100px;
     margin: 0 auto;
-    padding: 20px;
+    padding: 20px 20px 60px;
 }
+
+/* Search */
 
 #search {
     display: block;
     width: 100%;
-    max-width: 600px;
-    margin: 0 auto 35px;
-    padding: 14px 18px;
-    border: 1px solid #dbe1ea;
-    border-radius: 12px;
-    background-color: #ffffff;
-    font-size: 16px;
+    max-width: 340px;
+    margin: 0 0 32px;
+    padding: 11px 14px;
+    border: 2px solid var(--ink);
+    border-radius: 0;
+    background-color: var(--white);
+    color: var(--ink);
+    font-size: 15px;
+    font-family: inherit;
     outline: none;
 }
 
-#search:focus {
-    border-color: #4f46e5;
+#search::placeholder {
+    color: #8a867c;
 }
+
+#search:focus {
+    background-color: var(--highlight);
+}
+
+/* Tool cards */
 
 #tools-container {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-    gap: 20px;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 26px 24px;
+    padding-bottom: 8px;
 }
 
 .tool-card {
-    background-color: #ffffff;
-    padding: 25px;
-    border-radius: 16px;
-    border: 1px solid #e2e8f0;
-    transition: transform 0.2s, box-shadow 0.2s;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    background-color: var(--white);
+    padding: 20px;
+    border: 2px solid var(--ink);
+    border-radius: 0;
+    box-shadow: var(--shadow);
+    transition: transform 0.12s ease, box-shadow 0.12s ease;
+}
+
+.tool-card:last-child {
+    grid-column: 2;
+}
+
+/* Slightly off-level, like they were placed by hand */
+.tool-card:nth-child(3n + 2) {
+    transform: rotate(0.6deg);
+}
+
+.tool-card:nth-child(3n) {
+    transform: rotate(-0.5deg);
 }
 
 .tool-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+    transform: translate(-2px, -2px) rotate(0deg);
+    box-shadow: var(--shadow-hover);
 }
 
 .tool-icon {
-    font-size: 32px;
-    margin-bottom: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    margin-bottom: 16px;
+    border: 2px solid var(--ink);
+    background-color: #ffd23f;
+    font-size: 24px;
+    line-height: 1;
 }
 
+.tool-card:nth-child(7n + 2) .tool-icon { background-color: #ff7a5c; }
+.tool-card:nth-child(7n + 3) .tool-icon { background-color: #7ec8ff; }
+.tool-card:nth-child(7n + 4) .tool-icon { background-color: #9be39b; }
+.tool-card:nth-child(7n + 5) .tool-icon { background-color: #ffb3d1; }
+.tool-card:nth-child(7n + 6) .tool-icon { background-color: #c9b6ff; }
+.tool-card:nth-child(7n + 7) .tool-icon { background-color: #ffa94d; }
+
 .tool-card h2 {
-    font-size: 20px;
-    margin-bottom: 10px;
+    font-size: 19px;
+    font-weight: 700;
+    line-height: 1.25;
+    margin-bottom: 6px;
 }
 
 .tool-card p {
-    color: #64748b;
+    flex: 1;
+    color: var(--muted);
     font-size: 14px;
-    line-height: 1.6;
-    margin-bottom: 20px;
+    line-height: 1.55;
+    margin-bottom: 18px;
 }
 
 .tool-card button {
-    background-color: #4f46e5;
-    color: white;
-    border: none;
-    padding: 10px 16px;
-    border-radius: 8px;
-    cursor: pointer;
+    background-color: var(--ink);
+    color: var(--white);
+    border: 2px solid var(--ink);
+    border-radius: 0;
+    padding: 8px 14px;
+    font-family: inherit;
     font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.12s ease, color 0.12s ease;
 }
 
 .tool-card button:hover {
-    background-color: #4338ca;
+    background-color: var(--white);
+    color: var(--ink);
 }
 
-.hidden {
-    display: none;
-}
+/* Tool Workspace */
 
 #tool-workspace {
-    background: #ffffff;
-    padding: 25px;
-    border-radius: 16px;
-    border: 1px solid #e2e8f0;
+    width: 100%;
+    min-height: 70vh;
+    margin-top: 28px;
+    padding: 28px;
+    background-color: var(--white);
+    border: 2px solid var(--ink);
+    border-radius: 0;
+    box-shadow: var(--shadow);
 }
 
 #back-button {
-    padding: 10px 14px;
-    margin-bottom: 25px;
-    border: none;
-    border-radius: 8px;
-    background: #e0e7ff;
-    color: #4338ca;
+    margin-bottom: 26px;
+    padding: 8px 14px;
+    border: 2px solid var(--ink);
+    border-radius: 0;
+    background-color: var(--paper);
+    color: var(--ink);
+    font-family: inherit;
+    font-size: 14px;
     cursor: pointer;
 }
 
-#tool-content textarea {
-    width: 100%;
-    min-height: 180px;
-    padding: 14px;
-    margin: 15px 0;
-    border: 1px solid #dbe1ea;
-    border-radius: 10px;
-    font: inherit;
-    resize: vertical;
-}
-
-#tool-content p {
-    margin: 10px 0;
-    color: #475569;
-}
-
-#tool-workspace {
-    min-height: 70vh;
-    width: 100%;
+#back-button:hover {
+    background-color: var(--highlight);
 }
 
 #tool-workspace h2 {
-    font-size: 28px;
+    font-size: 30px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
     margin-bottom: 20px;
 }
 
@@ -151,33 +213,188 @@ main {
     max-width: 900px;
 }
 
-#tool-content input {
+#tool-content h3 {
+    font-size: 18px;
+    font-weight: 700;
+    margin: 26px 0 10px;
+}
+
+#tool-content h3:first-child {
+    margin-top: 0;
+}
+
+#tool-content p {
+    margin: 10px 0;
+    color: var(--muted);
+}
+
+/* Live results and stats get a highlighter strip */
+#tool-content p[id]:not(:empty) {
+    display: inline-block;
+    margin: 6px 10px 6px 0;
+    padding: 5px 10px;
+    border: 2px solid var(--ink);
+    background-color: var(--highlight);
+    color: var(--ink);
+    font-weight: 700;
+    font-size: 14px;
+}
+
+#tool-content label {
+    display: inline-block;
+    margin: 8px 0 2px;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+#tool-content textarea {
+    display: block;
+    width: 100%;
+    min-height: 180px;
+    padding: 14px;
+    margin: 15px 0;
+    border: 2px solid var(--ink);
+    border-radius: 0;
+    background-color: var(--white);
+    color: var(--ink);
+    font: inherit;
+    resize: vertical;
+    outline: none;
+}
+
+#tool-content input[type="text"],
+#tool-content input[type="number"],
+#tool-content select {
     display: block;
     width: 100%;
     max-width: 450px;
-    padding: 12px;
-    margin: 12px 0;
-    border: 1px solid #dbe1ea;
-    border-radius: 8px;
+    padding: 11px 12px;
+    margin: 10px 0 14px;
+    border: 2px solid var(--ink);
+    border-radius: 0;
+    background-color: var(--white);
+    color: var(--ink);
+    font-family: inherit;
     font-size: 15px;
+    outline: none;
 }
 
-#tool-content button {
-    padding: 10px 15px;
-    margin: 5px 5px 12px 0;
-    border: none;
-    border-radius: 8px;
-    background: #4f46e5;
-    color: white;
+#tool-content textarea:focus,
+#tool-content input[type="text"]:focus,
+#tool-content input[type="number"]:focus,
+#tool-content select:focus {
+    background-color: var(--highlight);
+}
+
+/* Checkboxes inside password generator */
+#tool-content input[type="checkbox"] {
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    margin: 0 8px 0 0;
+    vertical-align: -3px;
+    accent-color: var(--ink);
     cursor: pointer;
 }
 
-#tool-content h3 {
-    margin-top: 25px;
+#tool-content label:has(input[type="checkbox"]) {
+    display: block;
+    font-weight: 400;
+    margin: 6px 0;
+    cursor: pointer;
+}
+
+#tool-content button {
+    padding: 9px 15px;
+    margin: 5px 8px 12px 0;
+    border: 2px solid var(--ink);
+    border-radius: 0;
+    background-color: var(--ink);
+    color: var(--white);
+    font-family: inherit;
+    font-size: 14px;
+    cursor: pointer;
+    transition: transform 0.12s ease, box-shadow 0.12s ease;
+}
+
+#tool-content button:hover {
+    transform: translate(-1px, -1px);
+    box-shadow: 3px 3px 0 #ff7a5c;
+}
+
+#tool-content button:active {
+    transform: translate(1px, 1px);
+    box-shadow: none;
+}
+
+/* Stopwatch and timer readouts */
+#stopwatch-display,
+#timer-display {
+    font-size: 48px;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: 1px;
+    margin: 6px 0 14px;
+}
+
+#qr-result {
+    margin: 18px 0;
+}
+
+#qr-result img,
+#qr-result canvas {
+    border: 2px solid var(--ink);
+    padding: 8px;
+    background-color: var(--white);
 }
 
 #tool-content hr {
     border: none;
-    border-top: 1px solid #e2e8f0;
-    margin: 20px 0;
+    border-top: 2px solid var(--ink);
+    margin: 28px 0;
 }
+
+/* Accessibility */
+
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+    outline: 3px solid #4d7cff;
+    outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    * {
+        transition: none !important;
+    }
+}
+
+/* Small screens */
+
+@media (max-width: 600px) {
+    header {
+        padding-top: 36px;
+    }
+
+    header h1 {
+        font-size: 32px;
+    }
+
+    #search {
+        max-width: none;
+    }
+
+    #tools-container {
+        grid-template-columns: 1fr;
+    }
+
+    #tool-workspace {
+        padding: 18px;
+    }
+
+    #stopwatch-display,
+    #timer-display {
+        font-size: 38px;
+    }
+}   
