@@ -1,40 +1,26 @@
-# TinyTools — Everyday Utilities
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/bbec3fd9-ecae-47d7-933c-e7199908b28c" /># TinyTools – Everyday Utilities
 
-> A collection of simple, useful browser-based tools designed to make everyday tasks quicker and easier.
+A collection of simple browser-based tools for everyday tasks, all in one place.
 
-TinyTools brings multiple everyday utilities together in one lightweight web application. From counting words and formatting text to generating QR codes and passwords, everything is accessible from a single place.
+## Description
 
-**Live Demo:** [Open TinyTools](https://aryanbhatnagar0102.github.io/TinyTools/)
+TinyTools is a website that brings seven small tools together in one place. It includes things like a word counter, text formatter, percentage calculator, unit converter, QR code generator, password generator, and stopwatch. Instead of visiting different websites for these tasks, you can use them all here.
 
-<img width="1290" height="890" alt="image" src="https://github.com/user-attachments/assets/53c56c39-6894-459e-9aca-fd73daf7b592" />
+### Screenshots
+
+<img width="1477" height="915" alt="image" src="https://github.com/user-attachments/assets/aab90e06-227d-4e60-ac16-900d32cbb1c0" />
 
 
----
+## Getting Started
 
-##  Features
+### Dependencies
 
-TinyTools currently includes seven utilities:
+- A modern web browser (Chrome, Firefox, Edge, etc.).
+- Visual Studio Code (recommended).
+- Live Server extension for VS Code (recommended).
+- Internet connection for loading the QR Code library.
 
-- **Word Counter** — Count words, characters, sentences, and paragraphs, with an estimated reading time.
-- **Text Formatter** — Convert text to uppercase, lowercase, or title case, remove extra spaces, and copy formatted text.
-- **Percentage Calculator** — Calculate percentages, percentage changes, and discounts.
-- **Unit Converter** — Convert length, weight, temperature, and time units.
-- **QR Code Generator** — Generate QR codes from text or URLs and download them as PNG images.
-- **Password Generator** — Generate random passwords with customizable length and character types.
-- **Stopwatch & Timer** — Track elapsed time with a stopwatch or use a countdown timer.
-
-##  Tech Stack
-
-- **HTML5** — Page structure and tool interfaces.
-- **CSS3** — Layout, responsive design, and visual styling.
-- **Vanilla JavaScript** — Tool functionality, event handling, calculations, and DOM manipulation.
-- **QRCode.js** — QR code generation through an external library.
-
-No frontend framework is required.
-
-##  Run Locally
-
-You can run TinyTools locally using VS Code and the Live Server extension.
+### Installing
 
 1. Clone the repository:
 
@@ -42,55 +28,51 @@ You can run TinyTools locally using VS Code and the Live Server extension.
    git clone https://github.com/aryanbhatnagar0102/TinyTools.git
    ```
 
-2. Open the project folder:
+2. Navigate to the project folder:
 
    ```bash
    cd TinyTools
    ```
 
-3. Open the folder in VS Code.
+3. Open the folder in Visual Studio Code.
 
-4. Launch `index.html` using **Live Server**.
+### Executing the Program
 
-Alternatively, open `index.html` directly in your browser. Some browser features, such as clipboard access, may work more reliably through Live Server.
+1. Open `index.html` in VS Code.
+2. Right-click anywhere in the editor.
+3. Select **Open with Live Server**.
+4. TinyTools will open in your default browser.
 
-## Project Structure
+You can also open `index.html` directly in a browser.
 
-```text
-TinyTools/
-├── index.html
-├── style.css
-├── script.js
-└── README.md
-```
+## Features
 
-## What I Learned
+TinyTools currently includes seven utilities:
 
-Building TinyTools gave me practical experience with:
+- **Word Counter:** Counts words, characters, sentences, and paragraphs, with estimated reading time.
+- **Text Formatter:** Converts text into uppercase, lowercase, and title case, removes extra spaces, and copies text.
+- **Percentage Calculator:** Calculates percentages, discounts, and percentage changes.
+- **Unit Converter:** Converts length, weight, temperature, and time.
+- **QR Code Generator:** Generates QR codes from text and URLs and allows downloading them as PNG images.
+- **Password Generator:** Creates random passwords with customizable length and character options.
+- **Stopwatch & Timer:** Tracks elapsed time and provides a countdown timer.
 
-- Manipulating the DOM dynamically using JavaScript.
-- Handling user input and validating values.
-- Implementing event listeners and timer intervals.
-- Performing percentage calculations and unit conversions.
-- Generating secure random passwords using the Web Crypto API.
-- Integrating an external JavaScript library.
-- Designing responsive layouts using CSS Grid and Flexbox.
-- Debugging issues and improving usability through iterative testing.
+## Tech Stack
 
-## Future Improvements
+## Tech Stack
 
-- Add more everyday utilities.
-- Improve accessibility and keyboard navigation.
-- Refine the interface for different screen sizes.
-- Add useful quality-of-life features to existing tools.
+- HTML
+- CSS
+- JavaScript
+- SVG for icons
+- QRCode.js
 
-## Author
+## Help
 
-**Aryan Bhatnagar**
+- If the QR Code Generator does not work, check your internet connection.
+- If clipboard functionality fails, try running the project through Live Server.
+- If the website does not load correctly, check the browser console for errors.
 
-- GitHub: [@aryanbhatnagar0102](https://github.com/aryanbhatnagar0102)
-- LinkedIn: [Connect with me](https://www.linkedin.com/in/aryan-bhatnagar-576838303/)
+## License
 
----
-
-*Built with HTML, CSS, and JavaScript to make everyday tasks a little easier.*
+This project is licensed under the MIT License - see the LICENSE.md file for details
