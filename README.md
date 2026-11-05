@@ -1,4 +1,4 @@
-<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/bbec3fd9-ecae-47d7-933c-e7199908b28c" /># TinyTools – Everyday Utilities
+# TinyTools – Everyday Utilities
 
 A collection of simple browser-based tools for everyday tasks, all in one place.
 
