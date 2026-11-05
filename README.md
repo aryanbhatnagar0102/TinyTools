@@ -59,8 +59,6 @@ TinyTools currently includes seven utilities:
 
 ## Tech Stack
 
-## Tech Stack
-
 - HTML
 - CSS
 - JavaScript
