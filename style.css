@@ -1,6 +1,6 @@
 
 :root {
-    --bg: #f7f7f7;
+    --bg: #f1e7d8;
     --white: #fff;
     --black: #222;
     --grey: #777;
@@ -20,6 +20,8 @@ body {
     color: var(--black);
     line-height: 1.5;
 }
+
+
 
 .hidden {
     display: none !important;
